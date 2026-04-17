@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>重申主体性：教育资格化的僭越与回归</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: #2a3050;
+    --accent-gold: #c9a84c;
+    --accent-red: #c94c4c;
+    --accent-teal: #4caaaa;
+    --accent-purple: #8b6cc4;
+    --accent-green: #5ea85e;
+    --accent-blue: #4c7fc9;
+    --text-primary: #e8e4d8;
+    --text-secondary: #9a9688;
+    --text-dim: #606060;
+    --center-glow: rgba(201,168,76,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+    overflow-x: auto;
+  }
+
+  .header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0a0c10 0%, var(--bg) 100%);
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .header p {
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* ─── MAIN MAP LAYOUT ─── */
+  .map-container {
+    padding: 32px 20px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Center node */
+  .center-hub {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .center-node {
+    background: radial-gradient(ellipse at center, #1e1a0e 0%, #12100a 100%);
+    border: 2px solid var(--accent-gold);
+    border-radius: 16px;
+    padding: 24px 40px;
+    text-align: center;
+    max-width: 480px;
+    box-shadow: 0 0 60px rgba(201,168,76,0.25), 0 0 20px rgba(201,168,76,0.1);
+    position: relative;
+  }
+
+  .center-node::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,168,76,0.2);
+    pointer-events: none;
+  }
+
+  .center-node .cn-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .center-node h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: var(--accent-gold);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .center-node .subtitle {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ─── SECTION GRID ─── */
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  /* Each section card */
+  .section-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+    animation: fadeIn 0.6s ease both;
+  }
+
+  .section-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-card:nth-child(1) { animation-delay: 0.05s; }
+  .section-card:nth-child(2) { animation-delay: 0.1s; }
+  .section-card:nth-child(3) { animation-delay: 0.15s; }
+  .section-card:nth-child(4) { animation-delay: 0.2s; }
+  .section-card:nth-child(5) { animation-delay: 0.25s; }
+  .section-card:nth-child(6) { animation-delay: 0.3s; }
+  .section-card:nth-child(7) { animation-delay: 0.35s; }
+
+  .section-header {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .section-body {
+    padding: 14px 18px;
+  }
+
+  /* Branch / sub-node */
+  .branch {
+    margin-bottom: 12px;
+  }
+
+  .branch:last-child { margin-bottom: 0; }
+
+  .branch-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .branch-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .branch-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-left: 13px;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 1px solid;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  /* ─── COLOR THEMES PER SECTION ─── */
+
+  /* 1. Theoretical Foundation — gold */
+  .s1 .section-header { background: linear-gradient(90deg,rgba(201,168,76,0.12),transparent); }
+  .s1 .section-num { background: rgba(201,168,76,0.2); color: var(--accent-gold); border: 1px solid rgba(201,168,76,0.4); }
+  .s1 .section-title { color: var(--accent-gold); }
+  .s1 .branch-title { color: var(--accent-gold); }
+  .s1 .branch-title::before { background: var(--accent-gold); }
+  .s1 .tag { border-color: rgba(201,168,76,0.35); color: #d4b86a; background: rgba(201,168,76,0.07); }
+
+  /* 2. Core Concept — red */
+  .s2 .section-header { background: linear-gradient(90deg,rgba(201,76,76,0.12),transparent); }
+  .s2 .section-num { background: rgba(201,76,76,0.2); color: var(--accent-red); border: 1px solid rgba(201,76,76,0.4); }
+  .s2 .section-title { color: var(--accent-red); }
+  .s2 .branch-title { color: var(--accent-red); }
+  .s2 .branch-title::before { background: var(--accent-red); }
+  .s2 .tag { border-color: rgba(201,76,76,0.35); color: #d47070; background: rgba(201,76,76,0.07); }
+
+  /* 3. Phenomenon — teal */
+  .s3 .section-header { background: linear-gradient(90deg,rgba(76,170,170,0.12),transparent); }
+  .s3 .section-num { background: rgba(76,170,170,0.2); color: var(--accent-teal); border: 1px solid rgba(76,170,170,0.4); }
+  .s3 .section-title { color: var(--accent-teal); }
+  .s3 .branch-title { color: var(--accent-teal); }
+  .s3 .branch-title::before { background: var(--accent-teal); }
+  .s3 .tag { border-color: rgba(76,170,170,0.35); color: #6ec4c4; background: rgba(76,170,170,0.07); }
+
+  /* 4. Mechanism — purple */
+  .s4 .section-header { background: linear-gradient(90deg,rgba(139,108,196,0.12),transparent); }
+  .s4 .section-num { background: rgba(139,108,196,0.2); color: var(--accent-purple); border: 1px solid rgba(139,108,196,0.4); }
+  .s4 .section-title { color: var(--accent-purple); }
+  .s4 .branch-title { color: var(--accent-purple); }
+  .s4 .branch-title::before { background: var(--accent-purple); }
+  .s4 .tag { border-color: rgba(139,108,196,0.35); color: #a888dc; background: rgba(139,108,196,0.07); }
+
+  /* 5. Impact — blue */
+  .s5 .section-header { background: linear-gradient(90deg,rgba(76,127,201,0.12),transparent); }
+  .s5 .section-num { background: rgba(76,127,201,0.2); color: var(--accent-blue); border: 1px solid rgba(76,127,201,0.4); }
+  .s5 .section-title { color: var(--accent-blue); }
+  .s5 .branch-title { color: var(--accent-blue); }
+  .s5 .branch-title::before { background: var(--accent-blue); }
+  .s5 .tag { border-color: rgba(76,127,201,0.35); color: #6c9fd4; background: rgba(76,127,201,0.07); }
+
+  /* 6. Return Path — green */
+  .s6 .section-header { background: linear-gradient(90deg,rgba(94,168,94,0.12),transparent); }
+  .s6 .section-num { background: rgba(94,168,94,0.2); color: var(--accent-green); border: 1px solid rgba(94,168,94,0.4); }
+  .s6 .section-title { color: var(--accent-green); }
+  .s6 .branch-title { color: var(--accent-green); }
+  .s6 .branch-title::before { background: var(--accent-green); }
+  .s6 .tag { border-color: rgba(94,168,94,0.35); color: #7ec87e; background: rgba(94,168,94,0.07); }
+
+  /* 7. Conclusion — gold dim */
+  .s7 .section-header { background: linear-gradient(90deg,rgba(180,150,90,0.1),transparent); }
+  .s7 .section-num { background: rgba(180,150,90,0.15); color: #b49650; border: 1px solid rgba(180,150,90,0.3); }
+  .s7 .section-title { color: #b49650; }
+  .s7 .branch-title { color: #b49650; }
+  .s7 .branch-title::before { background: #b49650; }
+  .s7 .tag { border-color: rgba(180,150,90,0.3); color: #c4a860; background: rgba(180,150,90,0.06); }
+
+  /* ─── FLOW ARROW between center and grid ─── */
+  .flow-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 28px;
+  }
+
+  .flow-connector .line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  }
+
+  .flow-connector .diamond {
+    width: 10px;
+    height: 10px;
+    background: var(--accent-gold);
+    transform: rotate(45deg);
+    opacity: 0.7;
+  }
+
+  .flow-connector .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+
+  /* ─── KEY ARGUMENT BANNER ─── */
+  .key-arg {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-gold);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 20px 0 28px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .key-arg strong {
+    color: var(--accent-gold);
+  }
+
+  /* ─── FOOTER LEGEND ─── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  /* Wide cards */
+  .wide { grid-column: span 2; }
+
+  @media(max-width: 700px) {
+    .wide { grid-column: span 1; }
+  }
+
+  /* Inner quote */
+  .quote-block {
+    background: rgba(201,168,76,0.05);
+    border-left: 2px solid rgba(201,168,76,0.4);
+    padding: 8px 12px;
+    margin: 10px 0 4px;
+    font-size: 0.73rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* Separator */
+  .sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  /* ─── CONCEPT TRIANGLE ─── */
+  .triangle-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 0 0 28px;
+  }
+
+  .tri-node {
+    text-align: center;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid;
+    min-width: 110px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .tri-node .tri-label {
+    font-size: 0.65rem;
+    opacity: 0.65;
+    margin-bottom: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  .tri-gold { border-color: rgba(201,168,76,0.5); color: var(--accent-gold); background: rgba(201,168,76,0.08); }
+  .tri-red  { border-color: rgba(201,76,76,0.5);  color: var(--accent-red);  background: rgba(201,76,76,0.08);  }
+  .tri-teal { border-color: rgba(76,170,170,0.5); color: var(--accent-teal); background: rgba(76,170,170,0.08); }
+
+  .tri-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>重申主体性：教育资格化的僭越与回归</h1>
+  <p>毕业论文研究思维导图 · Biesta 教育目的三维框架</p>
+</div>
+
+<div class="map-container">
+
+  <!-- Center Node -->
+  <div class="center-hub">
+    <div class="center-node">
+      <div class="cn-label">核心命题</div>
+      <h2>资格化的僭越</h2>
+      <div class="subtitle">
+        资格化功能溢出正当边界，<br>
+        主导教育目的结构，侵占主体化空间，<br>
+        构成当代教育异化的重要机制
+      </div>
+    </div>
+  </div>
+
+  <!-- Biesta Triangle -->
+  <div class="triangle-row">
+    <div class="tri-node tri-gold">
+      <div class="tri-label">Qualification</div>
+      资格化
+    </div>
+    <div style="display:flex;align-items:center;color:#555;font-size:1.1rem;">⇌</div>
+    <div class="tri-node tri-teal">
+      <div class="tri-label">Socialization</div>
+      社会化
+    </div>
+    <div style="display:flex;align-items:center;color:#555;font-size:1.1rem;">⇌</div>
+    <div class="tri-node tri-red" style="border-color:rgba(201,76,76,0.8);box-shadow:0 0 14px rgba(201,76,76,0.15);">
+      <div class="tri-label">Subjectification</div>
+      主体化（被侵占）
+    </div>
+  </div>
+
+  <div class="key-arg">
+    <strong>研究逻辑主线：</strong>理论基础 → 概念建构 → 现象审视 → 机制探源 → 影响分析 → 回归路径 ——
+    遵循<strong>教育思辨研究</strong>范式，以<strong>想象、反思、理解、学理论证</strong>为方法，
+    探究资格化如何从必要功能演变为僭越性逻辑，并寻求教育价值的结构性回归。
+  </div>
+
+  <div class="flow-connector">
+    <div class="line"></div>
+    <div class="diamond"></div>
+    <div class="label">七大研究板块</div>
+    <div class="diamond"></div>
+    <div class="line"></div>
+  </div>
+
+  <!-- ─── 7 SECTIONS ─── -->
+  <div class="sections-grid">
+
+    <!-- ① 绪论 -->
+    <div class="section-card s1">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title">绪论：问题缘起与研究框架</div>
+      </div>
+      <div class="section-body">
+        <div class="branch">
+          <div class="branch-title">问题缘起</div>
+          <div class="branch-items">
+            <span class="tag">教育做得太多却失去根本</span>
+            <span class="tag">资格化逻辑压倒主体性</span>
+            <span class="tag">教育意义被功能性向度主导</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">三个递进研究问题</div>
+          <div class="branch-items">
+            <span class="tag">资格化如何演变为僭越性逻辑</span>
+            <span class="tag">经由何种机制侵占主体性空间</span>
+            <span class="tag">如何重申主体性与回归价值</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">研究意义</div>
+          <div class="branch-items">
+            <span class="tag">细化教育异化分析维度</span>
+            <span class="tag">深化比斯塔框架阐释</span>
+            <span class="tag">为教育改革提供本质反思依据</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">研究方法</div>
+          <div class="branch-items">
+            <span class="tag">教育思辨研究范式</span>
+            <span class="tag">概念辨析</span>
+            <span class="tag">逻辑推演</span>
+            <span class="tag">学理论证</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 理论基础 -->
+    <div class="section-card s1">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title">理论基础：比斯塔教育目的三维框架</div>
+      </div>
+      <div class="section-body">
+        <div class="branch">
+          <div class="branch-title">理论背景</div>
+          <div class="branch-items">
+            <span class="tag">应对教育目的工具化与单一化趋势</span>
+            <span class="tag">“学习化”转向批判</span>
+            <span class="tag">新自由主义治理批判</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">资格化（Qualification）</div>
+          <div class="branch-items">
+            <span class="tag">知识、技能、能力培养</span>
+            <span class="tag">制度合法性依据</span>
+            <span class="tag">最易被测量与操作化</span>
+          </div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">社会化（Socialization）</div>
+          <div class="branch-items">
+            <span class="tag">嵌入既有社会文化秩序</span>
+            <span class="tag">代际连续性维系</span>
+            <span class="tag">规范认同与文化传承</span>
+          </div>
+        </div>
+        <div class="branch">
+          <div class="branch-title">主体化（Subjectification）</div>
+          <div class="branch-items">
+            <span class="tag">独特方式“来到世界”</span>
+            <span class="tag">关系行动中不断生成</span>
+            <span class="tag">承担责任的行动者</span>
+            <span class="tag">不可化约·无法预设</span>
+          </div>
+        </div>
+        <div class="quote-block">
+          “一棵树摇动另一棵树，一朵云推动另一朵云，一个灵魂唤醒另一个灵魂”
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ 概念建构 -->
+    <div class="section-card s2">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title">概念建构：资格化的僭越</div>
+      </div>
+      <div class="section-body">
+        <div class="branch">
+          <div class="branch-title">“僭越”的哲学意蕴</div>
+          <div class="branch-items">
+            <span class="tag">古希腊 hubris（僭妄）</span>
+            <span class="tag">巴塔耶：界限与越界张力</span>
+            <span class="tag">福柯：权力渗透与边界扩展</span>
+            <span class="tag">越界·支配·入侵</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">核心定义</div>
+          <div class="branch-items">
+            <span class="tag">逾越合理边界</span>
+            <span class="tag">取得支配性地位</span>
+            <span class="tag">侵占主体化空间</span>
+            <span class="tag">教育功能单向化</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">内涵三特征</div>
+          <div class="branch-items">
+            <span class="tag">越界性 — 打破正当边界</span>
+            <span class="tag">支配性 — 垄断教育逻辑</span>
+            <span class="tag">入侵性 — 改造其他维度</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">三层表现外延</div>
+          <div class="branch-items">
+            <span class="tag">话语层 — 学习化叙事</span>
+            <span class="tag">制度层 — 标准化绩效</span>
+            <span class="tag">实践层 — 角色功能重构</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">概念辨析</div>
+          <div class="branch-items">
+            <span class="tag">vs 教育工具化（结果描述）</span>
+            <span class="tag">vs 教育异化（宏观批判）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ 现象审视 -->
+    <div class="section-card s3 wide">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title">现象审视：资格化僭越的表现形态与本质特征</div>
+      </div>
+      <div class="section-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+
+        <div>
+          <div class="branch">
+            <div class="branch-title">基础教育 — 应试导向</div>
+            <div class="branch-items">
+              <span class="tag">唯分数化倾向</span>
+              <span class="tag">分数化转译生命经验</span>
+              <span class="tag">“去应试化”表演下的再应试化</span>
+              <span class="tag">学习劳作化</span>
+              <span class="tag">主体被塑造为追分工具</span>
+            </div>
+          </div>
+          <div class="branch" style="margin-top:10px;">
+            <div class="branch-title">高等教育 — 学历通胀与就业焦虑</div>
+            <div class="branch-items">
+              <span class="tag">学历信号博弈</span>
+              <span class="tag">过度教育现象</span>
+              <span class="tag">高度策略化学习行为</span>
+              <span class="tag">主体性悬浮</span>
+              <span class="tag">就业焦虑弥漫</span>
+            </div>
+          </div>
+          <div class="branch" style="margin-top:10px;">
+            <div class="branch-title">职业教育 — 资格认证泛化</div>
+            <div class="branch-items">
+              <span class="tag">证书追逐文化</span>
+              <span class="tag">“订单式”培养模式</span>
+              <span class="tag">“1+X”证书制度异化执行</span>
+              <span class="tag">材料式·数字式改革</span>
+              <span class="tag">为岗位造人力遮蔽育人</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="branch">
+            <div class="branch-title">实践共性</div>
+            <div class="branch-items">
+              <span class="tag">借助正当性完成越界</span>
+              <span class="tag">主体化空间持续收窄</span>
+              <span class="tag">嵌于社会期待与制度安排</span>
+            </div>
+          </div>
+          <div class="sep"></div>
+          <div class="branch">
+            <div class="branch-title">本质特征 1：教育目的工具化</div>
+            <div class="branch-items">
+              <span class="tag">手段-目的关系倒置</span>
+              <span class="tag">教育价值外化为可量化产出</span>
+              <span class="tag">封闭“教育为了什么”的追问</span>
+            </div>
+          </div>
+          <div class="branch" style="margin-top:8px;">
+            <div class="branch-title">本质特征 2：教育知识符号化</div>
+            <div class="branch-items">
+              <span class="tag">知识以可认证符号流通</span>
+              <span class="tag">知识选择偏向可测量性</span>
+              <span class="tag">学习者与知识疏离异化</span>
+            </div>
+          </div>
+          <div class="branch" style="margin-top:8px;">
+            <div class="branch-title">本质特征 3：教育主体客体化</div>
+            <div class="branch-items">
+              <span class="tag">学生以指标身份出现</span>
+              <span class="tag">被引导的主动性</span>
+              <span class="tag">他者成竞争参照而非对话者</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⑤ 机制探源 -->
+    <div class="section-card s4 wide">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-title">机制探源：资格化僭越的生成逻辑</div>
+      </div>
+      <div class="section-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;">
+        <div>
+          <div class="branch">
+            <div class="branch-title">经济逻辑渗透</div>
+            <div class="branch-items">
+              <span class="tag">教育商品化</span>
+              <span class="tag">教育投资化（人力资本论）</span>
+              <span class="tag">问责制文化兴起</span>
+              <span class="tag">效率导向压缩“无用之用”</span>
+              <span class="tag">新公共管理主义落地教育</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="branch">
+            <div class="branch-title">话语机制建构</div>
+            <div class="branch-items">
+              <span class="tag">“学习化”转向（learnification）</span>
+              <span class="tag">受教育者→学习者→不足者</span>
+              <span class="tag">人力资本话语置换人的定义</span>
+              <span class="tag">终身学习变为生存威胁</span>
+              <span class="tag">批评语言被吸纳再编码</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="branch">
+            <div class="branch-title">制度环境支撑</div>
+            <div class="branch-items">
+              <span class="tag">评价体系资格化导向</span>
+              <span class="tag">绩效奖惩压力层层下传</span>
+              <span class="tag">教育资源配置市场化</span>
+              <span class="tag">“以资格换资源”闭环</span>
+              <span class="tag">形式主义·策略性合规</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="branch">
+            <div class="branch-title">个体心态驱动</div>
+            <div class="branch-items">
+              <span class="tag">工具理性普遍内化</span>
+              <span class="tag">自我=人力资本项目</span>
+              <span class="tag">风险社会追求确定性幻觉</span>
+              <span class="tag">竞争焦虑下的自我规训</span>
+              <span class="tag">竞争性自我凌驾他者关怀</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ 影响分析 -->
+    <div class="section-card s5">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <div class="section-title">影响分析：资格化僭越的双重损害</div>
+      </div>
+      <div class="section-body">
+        <div class="branch">
+          <div class="branch-title">个体领域</div>
+          <div class="branch-items">
+            <span class="tag">主体化功能失位</span>
+            <span class="tag">教育容错率塌陷</span>
+            <span class="tag">知识关系异化疏离</span>
+            <span class="tag">精神世界收窄</span>
+            <span class="tag">意义感受力萎缩</span>
+            <span class="tag">“量化囚笼”规训效应</span>
+            <span class="tag">主动参与却被系统引导</span>
+            <span class="tag">自我盘剥</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">公共领域</div>
+          <div class="branch-items">
+            <span class="tag">公共价值边缘化</span>
+            <span class="tag">民主参与能力萎缩</span>
+            <span class="tag">个体主义扩张侵蚀公共关怀</span>
+            <span class="tag">教育不平等被正当化</span>
+            <span class="tag">家庭资本差异放大</span>
+            <span class="tag">程序公平掩盖实质不公</span>
+            <span class="tag">对不公的反思能力衰退</span>
+          </div>
+        </div>
+        <div class="quote-block">
+          资格化的僭越不只是夺走机会，<br>还从内部削减了想象另一种存在方式的能力。
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑦ 回归路径 -->
+    <div class="section-card s6">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <div class="section-title">回归路径：重申主体性的多维策略</div>
+      </div>
+      <div class="section-body">
+        <div class="branch">
+          <div class="branch-title">理念重塑</div>
+          <div class="branch-items">
+            <span class="tag">三维目的动态平衡认知</span>
+            <span class="tag">容纳三维之间的内在张力</span>
+            <span class="tag">强调教育非功利价值取向</span>
+            <span class="tag">唤回教育公共性品格</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">实践变革</div>
+          <div class="branch-items">
+            <span class="tag">教学“悬置”策略</span>
+            <span class="tag">为中断·偶然性留出空间</span>
+            <span class="tag">评价体系多元化重构</span>
+            <span class="tag">非筛选性评价独立空间</span>
+            <span class="tag">教育治理民主化转向</span>
+            <span class="tag">教师专业判断权利保障</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">环境优化</div>
+          <div class="branch-items">
+            <span class="tag">教育政策价值导向调整</span>
+            <span class="tag">拒绝“以可测量性为合法性”</span>
+            <span class="tag">更新社会评价文化</span>
+            <span class="tag">松动资格符号垄断定义</span>
+            <span class="tag">就业市场弱化学历门槛探索</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑧ 结语 -->
+    <div class="section-card s7">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <div class="section-title">研究结论与展望</div>
+      </div>
+      <div class="section-body">
+        <div class="branch">
+          <div class="branch-title">四点核心结论</div>
+          <div class="branch-items">
+            <span class="tag">僭越跨层级共享同一逻辑，具自我伪装能力</span>
+            <span class="tag">生成机制具内生性与隐蔽性</span>
+            <span class="tag">个体主体性悬浮+公共性侵蚀相互强化</span>
+            <span class="tag">重申主体性≠否定资格化</span>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="branch">
+          <div class="branch-title">研究局限</div>
+          <div class="branch-items">
+            <span class="tag">思辨研究待实证补充</span>
+            <span class="tag">实践路径需进一步细化</span>
+            <span class="tag">本土文化语境挖掘不足</span>
+          </div>
+        </div>
+        <div class="quote-block">
+          教育，始终是为了人的到来。
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sections-grid -->
+</div><!-- /map-container -->
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent-gold)"></div>理论/绪论框架</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent-red)"></div>核心概念</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal)"></div>现象审视</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent-purple)"></div>生成机制</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent-blue)"></div>影响损害</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>回归路径</div>
+</div>
+
+</body>
+</html>
